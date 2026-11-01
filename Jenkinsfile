@@ -1,30 +1,48 @@
+
 pipeline {
     agent any
 
     stages {
-
         stage('Checkout') {
             steps {
-                echo 'Downloading Source Code'
+                checkout scm
+                echo 'Source code downloaded from GitHub'
             }
         }
 
-        stage('Build') {
+        stage('Validate') {
             steps {
-                echo 'Building Web Application'
+                bat '''
+                    if not exist index.html exit /b 1
+                    if not exist Jenkinsfile exit /b 1
+                    echo Required files found
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing Application'
+                bat '''
+                    findstr /i /c:"Question Bank Management" index.html
+                    if errorlevel 1 exit /b 1
+                    echo Application test passed
+                '''
             }
         }
 
-        stage('Deploy') {
+        stage('Build') {
             steps {
-                echo 'Deploying Application'
+                echo 'Static HTML application is ready to deploy'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'CI pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check Console Output.'
         }
     }
 }

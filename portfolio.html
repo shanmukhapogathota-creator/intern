@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shanmukha Pogathota — Portfolio</title>
+
+  <style>
+    /* ----------------- Reset & base ----------------- */
+    :root{
+      --bg:#0f1720;
+      --card:#0f1b26;
+      --muted:#9aa6b3;
+      --accent:#13c6d8;
+      --accent-2:#d17ad5;
+      --glass:rgba(255,255,255,0.03);
+      --radius:14px;
+      --card-radius:18px;
+      --max-w:1100px;
+      font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;margin:0;
+      font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+      background:radial-gradient(circle at top left,#13c6d8 0%,#0f1720 70%);
+      color:#e6eef6;overflow-y:auto;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:var(--max-w);margin:0 auto;padding:28px}
+
+    /* ----------------- header ----------------- */
+    header{
+      position:sticky;top:0;z-index:40;
+      background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(0,0,0,.15));
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(255,255,255,0.02)
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 20px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:42px;height:42px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid;place-items:center;font-weight:700
+    }
+    .brand h1{margin:0;font-size:18px}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{color:#e6eef6;opacity:.9}
+
+    /* ----------------- hero ----------------- */
+    .hero{padding:70px 0 90px;text-align:center}
+    .hero h2{font-size:44px;margin:6px 0;line-height:1.05}
+    .hero p{max-width:740px;margin:18px auto;color:var(--muted)}
+    .btn{
+      display:inline-block;background:var(--accent);color:#042028;
+      padding:12px 22px;border-radius:26px;font-weight:600;
+      margin-top:18px;box-shadow:0 6px 18px rgba(0,0,0,0.4)
+    }
+
+    /* Profile photo */
+    .profile-pic{
+      width:150px;height:150px;border-radius:50%;
+      border:4px solid rgba(255,255,255,0.2);
+      box-shadow:0 10px 30px rgba(0,0,0,0.5);
+      object-fit:cover;margin-bottom:20px;
+    }
+
+    /* ----------------- sections ----------------- */
+    section{padding:48px 0}
+    .section-title{text-align:center;margin-bottom:26px}
+    .section-title h3{margin:0;font-size:28px}
+    .underline{
+      width:70px;height:6px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      margin:10px auto;border-radius:6px
+    }
+
+    .about-card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      padding:26px;border-radius:var(--card-radius);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.02);
+      max-width:920px;margin:0 auto;color:var(--muted)
+    }
+
+    /* skills grid */
+    .skills-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:18px;max-width:900px;margin:22px auto
+    }
+    .skill{
+      background:var(--glass);padding:20px;border-radius:12px;
+      text-align:center;color:var(--muted);
+      box-shadow:0 6px 14px rgba(2,6,23,0.6)
+    }
+
+    /* projects */
+    .projects-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;max-width:1100px;margin:20px auto
+    }
+    .project{
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      padding:22px;border-radius:14px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);
+      min-height:230px;display:flex;flex-direction:column;justify-content:space-between
+    }
+    .project h4{margin:0 0 8px}
+    .project p{color:var(--muted);font-size:14px}
+    .live{
+      display:inline-block;background:var(--accent);color:#042028;
+      padding:8px 14px;border-radius:14px;margin-top:12px;cursor:pointer;
+    }
+
+    /* contact */
+    .contact-card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      padding:28px;border-radius:var(--card-radius);
+      max-width:900px;margin:14px auto;color:var(--muted);text-align:center
+    }
+
+    footer{text-align:center;padding:20px;color:var(--muted)}
+
+    .hero-sub{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:18px}
+
+    @media(min-width:900px){ .hero h2{font-size:56px} }
+
+    a:focus,.btn:focus,.live:focus{outline:3px solid rgba(19,198,216,0.18)}
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="logo">SP</div>
+      <div>
+        <h1>Shanmukha Pogathota</h1>
+        <div style="font-size:12px;color:var(--muted)">Full-Stack Developer</div>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <img src="ph.jpg" class="profile-pic" alt="Profile Photo">
+    <h2>
+      Hi, I'm <span style="background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;color:transparent">
+        Shanmukha Pogathota
+      </span>
+    </h2>
+    <p>A passionate <strong>Full-Stack Developer</strong> creating clean, fast and scalable web applications.</p>
+
+    <div class="hero-sub">
+      <a class="btn" href="#projects">View My Work</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-title"><h3>About Me</h3><div class="underline"></div></div>
+    <div class="about-card">
+      I love solving real-world problems with technology. I focus on UI design, backend development, and full-stack applications.
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-title"><h3>Skills</h3><div class="underline"></div></div>
+
+    <div class="skills-grid">
+      <div class="skill">HTML5 / CSS3 / JavaScript</div>
+      <div class="skill">React.js / Node.js / Express.js</div>
+      <div class="skill">MongoDB / SQL</div>
+      <div class="skill">Git / GitHub</div>
+      <div class="skill">Java / Python</div>
+      <div class ="skill">CCNA / Cyber Security</div>
+      <div class ="skill">PromptEngineering</div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-title"><h3>Projects</h3><div class="underline"></div></div>
+
+    <div class="projects-grid">
+
+      <div class="project">
+        <div>
+          <h4>📚 Question Bank Management</h4>
+          <p>Add, edit, delete and search questions with category-based organization.</p>
+        </div>
+        <div style="text-align:right">
+          <button class="live" onclick="openDemo('questionBank')">Live Demo</button>
+        </div>
+      </div>
+
+      <div class="project">
+        <div>
+          <h4>📝 Student Registration Form</h4>
+          <p>A responsive student form with validation and local storage.</p>
+        </div>
+        <div style="text-align:right">
+          <button class="live" onclick="openDemo('registration')">Live Demo</button>
+        </div>
+      </div>
+
+      <div class="project">
+        <div>
+          <h4>🔢 Counter App</h4>
+          <p>A simple counter demonstrating JavaScript DOM interactions.</p>
+        </div>
+        <div style="text-align:right">
+          <button class="live" onclick="openDemo('counter')">Live Demo</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-title"><h3>Contact</h3><div class="underline"></div></div>
+
+    <div class="contact-card">
+      Feel free to reach out for collaboration or opportunities!<br>
+      Email: <strong>shanmukha.pogathota@example.com</strong><br>
+      Location: Tadepalligudem, India
+      <div style="margin-top:16px"><a class="btn" href="mailto:shanmukha.pogathota@example.com">Send Message</a></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2025 Shanmukha Pogathota — Full-Stack Developer</footer>
+
+<!-- Script for opening demo pages -->
+<script>
+function openDemo(which){
+  let html = '';
+
+  /* ------------------ QUESTION BANK DEMO ------------------ */
+  if(which === 'questionBank'){
+    html = `
+<!doctype html><html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Question Bank - Demo</title>
+
+<style>
+body{font-family:Arial;margin:0;padding:0;background:linear-gradient(180deg,#b3f0ff,#c5ffd8);color:#052;
+display:flex;align-items:center;justify-content:center;height:100vh}
+.card{background:#fff;padding:18px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.15);width:92%;max-width:900px}
+h1{margin:0 0 8px}
+input,select,textarea{padding:8px;border-radius:6px;border:1px solid #bbb;width:100%}
+.controls{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+button{padding:8px 10px;border-radius:8px;border:none;background:#13c6d8;color:#042;cursor:pointer}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}
+</style>
+
+</head><body>
+
+<div class="card">
+<h1>Question Bank (Demo)</h1>
+<form id="qForm" onsubmit="return false">
+  <input id="qText" placeholder="Question text" required>
+  <select id="qCategory">
+    <option>General</option><option>Math</option><option>Science</option>
+  </select>
+  <input id="qAnswer" placeholder="Answer">
+
+  <div class="controls">
+    <button id="addBtn">Add</button>
+    <button id="clearBtn" type="button">Clear All</button>
+    <input id="search" placeholder="Search..." style="flex:1">
+  </div>
+</form>
+
+<table><thead>
+<tr><th>Question</th><th>Category</th><th>Answer</th><th>Actions</th></tr>
+</thead><tbody id="qTable"></tbody></table>
+
+</div>
+
+<script>
+const KEY='demo_question_bank_v1';
+let list=JSON.parse(localStorage.getItem(KEY)||'[]');
+const tbody=document.getElementById('qTable');
+
+function escape(x){return x.replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]))}
+
+function render(arr){
+  tbody.innerHTML='';
+  arr.forEach((q,i)=>{
+    tbody.innerHTML+=\`
+      <tr>
+        <td>\${escape(q.text)}</td>
+        <td>\${escape(q.category)}</td>
+        <td>\${escape(q.answer)}</td>
+        <td><button onclick="del(\${i})">Delete</button></td>
+      </tr>\`
+  });
+}
+
+function save(){localStorage.setItem(KEY,JSON.stringify(list));render(list)}
+function del(i){list.splice(i,1);save()}
+
+document.getElementById('addBtn').onclick=function(e){
+  e.preventDefault();
+  let t=document.getElementById('qText').value.trim();
+  if(!t)return alert("Enter question");
+  list.unshift({
+    text:t,
+    category:document.getElementById('qCategory').value,
+    answer:document.getElementById('qAnswer').value
+  });
+  document.getElementById('qText').value='';
+  document.getElementById('qAnswer').value='';
+  save();
+}
+
+document.getElementById('clearBtn').onclick=function(){
+  if(confirm("Clear all?")){list=[];save()}
+}
+
+document.getElementById('search').oninput=function(){
+  let q=this.value.toLowerCase();
+  render(!q?list:list.filter(x =>
+    x.text.toLowerCase().includes(q) ||
+    x.category.toLowerCase().includes(q) ||
+    x.answer.toLowerCase().includes(q)
+  ))
+}
+
+save();
+<\/script>
+
+</body></html>
+`;
+  }
+
+  /* ------------------ REGISTRATION FORM DEMO ------------------ */
+  if(which === 'registration'){
+    html = `
+<!doctype html><html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Registration Demo</title>
+
+<style>
+body{font-family:Georgia;background:#e9f0f4;margin:0;padding:30px;display:flex;justify-content:center}
+.form-wrap{background:#F4C2C2;padding:18px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.12);width:360px}
+input,select,textarea{width:100%;padding:8px;margin-top:4px;border-radius:4px;border:1px solid #999}
+.actions{display:flex;gap:8px;margin-top:12px}
+.btn{padding:8px 10px;border-radius:6px;border:none;cursor:pointer}
+.btn-primary{background:#4ecdc4}
+.btn-danger{background:#ff4d4d;color:white}
+</style>
+
+</head><body>
+
+<div class="form-wrap">
+<h2>Student Registration</h2>
+
+<form id="regForm" onsubmit="return false">
+<label>Full Name<input id="name" required></label>
+<label>Email<input id="email" type="email" required></label>
+<label>Password<input id="pwd" type="password" required></label>
+<label>Date of Birth<input id="dob" type="date"></label>
+<label>Department
+  <select id="dept"><option>--Select--</option><option>CS</option><option>IT</option></select>
+</label>
+<label>Address<textarea id="addr" rows="3"></textarea></label>
+
+<div class="actions">
+  <button class="btn btn-primary" id="regBtn">Register</button>
+  <button class="btn btn-danger" type="button" id="resetBtn">Reset</button>
+</div>
+
+</form>
+
+<div id="msg" style="margin-top:10px;color:#024"></div>
+
+</div>
+
+<script>
+document.getElementById('regBtn').onclick=function(e){
+  e.preventDefault();
+  let name=document.getElementById('name').value.trim();
+  let email=document.getElementById('email').value.trim();
+  let pwd=document.getElementById('pwd').value;
+
+  if(!name||!email||!pwd){
+    msg.textContent="Please fill required fields";
+    return;
+  }
+
+  let arr=JSON.parse(localStorage.getItem("demo_reg")||"[]");
+  arr.push({
+    name,email,
+    dob:document.getElementById('dob').value,
+    dept:document.getElementById('dept').value,
+    addr:document.getElementById('addr').value
+  });
+  localStorage.setItem("demo_reg",JSON.stringify(arr));
+  msg.textContent="Registered successfully!";
+  regForm.reset();
+}
+
+document.getElementById('resetBtn').onclick=function(){
+  regForm.reset();msg.textContent="";
+}
+<\/script>
+
+</body></html>
+`;
+  }
+
+  /* ------------------ COUNTER APP DEMO ------------------ */
+  if(which === 'counter'){
+    html = `
+<!doctype html><html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Counter Demo</title>
+
+<style>
+body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;
+background:linear-gradient(180deg,#7b3a99,#9be97b)}
+.box{background:#7b2bb1;padding:24px;border-radius:12px;color:white;text-align:center}
+.count{font-size:48px;margin:12px 0}
+button{padding:8px 12px;border-radius:8px;border:none;margin:0 8px;cursor:pointer}
+.add{background:#198754;color:white}
+.sub{background:#d63333;color:white}
+.reset{background:#ffe8d6;color:#042}
+</style>
+
+</head><body>
+
+<div class="box">
+<h1>Counter App</h1>
+<div id="count" class="count">0</div>
+<div>
+  <button class="add" id="addBtn">Add</button>
+  <button class="reset" id="resetBtn">Reset</button>
+  <button class="sub" id="subBtn">Sub</button>
+</div>
+</div>
+
+<script>
+let c=0;let el=document.getElementById('count');
+addBtn.onclick=()=>{c++;el.textContent=c}
+subBtn.onclick=()=>{c--;el.textContent=c}
+resetBtn.onclick=()=>{c=0;el.textContent=c}
+<\/script>
+
+</body></html>
+`;
+  }
+
+  // Open in a popup window
+  const w = window.open("", "_blank");
+  if(!w){ alert("Popup Blocked — Allow popups to view demo."); return; }
+
+  const blob = new Blob([html], {type:"text/html"});
+  w.location.href = URL.createObjectURL(blob);
+}
+</script>
+
+</body>
+</html>

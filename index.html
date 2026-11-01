@@ -1,92 +1,345 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Welcome</title>
-  <style>
-    html,body{
-      height:100%;
-      margin:0;
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at top left, #13c6d8 0%, #0f1720 70%);
-      color:#e6eef6;
-      overflow:auto;
-    }
-    .container{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      height:100%;
-      text-align:center;
-      animation: fadeIn 2s ease-in;
-    }
-    h1{
-      font-size:48px;
-      background:linear-gradient(90deg,#13c6d8,#d17ad5);
-      -webkit-background-clip:text;
-      color:transparent;
-      margin-bottom:10px;
-    }
-    p{
-      font-size:18px;
-      color:#cbd5e1;
-      margin-top:0;
-    }
-    .btn{
-      background:linear-gradient(90deg,#13c6d8,#d17ad5);
-      color:#042028;
-      padding:14px 26px;
-      border:none;
-      border-radius:30px;
-      font-weight:600;
-      font-size:16px;
-      margin-top:24px;
-      cursor:pointer;
-      box-shadow:0 6px 18px rgba(0,0,0,0.4);
-      transition:transform .3s ease, box-shadow .3s ease;
-    }
-    .btn:hover{
-      transform:scale(1.08);
-      box-shadow:0 8px 24px rgba(19,198,216,0.5);
-    }
-    @keyframes fadeIn{
-      from{opacity:0;transform:scale(0.96);}
-      to{opacity:1;transform:scale(1);}
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Question Bank Management</title>
+<style>
+* { box-sizing: border-box; }
 
-    /* subtle glowing border animation */
-    .glow-border{
-      position:absolute;
-      top:0;left:0;right:0;bottom:0;
-      pointer-events:none;
-      background:conic-gradient(from 180deg,#13c6d8,#d17ad5,#13c6d8);
-      mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor;
-      mask-composite:exclude;
-      padding:3px;
-      border-radius:40px;
-      animation: spin 6s linear infinite;
-      opacity:0.5;
-    }
-    @keyframes spin{
-      to{transform:rotate(360deg);}
-    }
-  </style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #172033;
+}
+
+header {
+  background: #172554;
+  color: white;
+  padding: 24px;
+  text-align: center;
+}
+
+header p { color: #cbd5e1; }
+
+.container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 16px;
+}
+
+.card {
+  background: white;
+  padding: 22px;
+  margin-bottom: 22px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px #0000000d;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+input, select, textarea, button {
+  font: inherit;
+  padding: 11px;
+  border-radius: 7px;
+}
+
+input, select, textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  margin-top: 6px;
+}
+
+textarea { resize: vertical; }
+
+button {
+  border: none;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+}
+
+button:hover { opacity: 0.88; }
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.cancel { background: #64748b; }
+.delete { background: #dc2626; }
+.edit { background: #0f766e; }
+
+.toolbar {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+th { background: #eff6ff; }
+
+td button { margin: 2px; }
+
+#message {
+  margin-top: 12px;
+  color: #047857;
+}
+
+@media (max-width: 600px) {
+  .toolbar { grid-template-columns: 1fr; }
+  header { padding: 18px 10px; }
+}
+</style>
 </head>
-<body>
-  <div class="container">
-    <div class="glow-border"></div>
-    <h1>Welcome to My Portfolio</h1>
-    <p>Hi, I’m <strong>Shanmukha Pogathota</strong> — Full-Stack Developer.</p>
-    <button class="btn" onclick="openPortfolio()">View My Portfolio</button>
-  </div>
 
-  <script>
-    function openPortfolio(){
-      window.location.href = "portfolio.html"; 
-    }
-  </script>
+<body>
+<header>
+  <h1>📚 Question Bank Management</h1>
+  <p>Add, organize, search and manage your questions</p>
+</header>
+
+<main class="container">
+  <section class="card">
+    <h2 id="formTitle">Add New Question</h2>
+
+    <form id="questionForm">
+      <label for="question">Question</label>
+      <textarea id="question" rows="3"
+        placeholder="Enter your question" required></textarea>
+
+      <div class="form-grid">
+        <div>
+          <label for="category">Category</label>
+          <select id="category">
+            <option>General</option>
+            <option>Java</option>
+            <option>Python</option>
+            <option>DBMS</option>
+            <option>Computer Networks</option>
+            <option>Operating Systems</option>
+            <option>Web Development</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="answer">Answer</label>
+          <textarea id="answer" rows="3"
+            placeholder="Enter the answer"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" id="saveButton">Add Question</button>
+        <button type="button" class="cancel"
+          id="cancelButton" hidden>Cancel Edit</button>
+      </div>
+      <p id="message" role="status"></p>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Manage Questions</h2>
+    <div class="toolbar">
+      <input id="search" type="search"
+        placeholder="Search questions or answers...">
+
+      <select id="filter">
+        <option value="">All Categories</option>
+        <option>General</option>
+        <option>Java</option>
+        <option>Python</option>
+        <option>DBMS</option>
+        <option>Computer Networks</option>
+        <option>Operating Systems</option>
+        <option>Web Development</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <p id="count">Total questions: 0</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Category</th>
+            <th>Answer</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="questionList"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script>
+const STORAGE_KEY = "question_bank_v1";
+
+let questions = JSON.parse(
+  localStorage.getItem(STORAGE_KEY) || "[]"
+);
+let editingId = null;
+
+const form = document.getElementById("questionForm");
+const questionInput = document.getElementById("question");
+const categoryInput = document.getElementById("category");
+const answerInput = document.getElementById("answer");
+const questionList = document.getElementById("questionList");
+const message = document.getElementById("message");
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(questions));
+  render();
+}
+
+function addCell(row, value) {
+  const cell = document.createElement("td");
+  cell.textContent = value;
+  row.appendChild(cell);
+  return cell;
+}
+
+function render() {
+  questionList.replaceChildren();
+
+  const searchText = document.getElementById("search")
+    .value.toLowerCase();
+  const selectedCategory = document.getElementById("filter").value;
+
+  const filtered = questions.filter(q =>
+    (q.question.toLowerCase().includes(searchText) ||
+     q.answer.toLowerCase().includes(searchText)) &&
+    (!selectedCategory || q.category === selectedCategory)
+  );
+
+  document.getElementById("count").textContent =
+    `Showing ${filtered.length} of ${questions.length} questions`;
+
+  filtered.forEach(q => {
+    const row = document.createElement("tr");
+
+    addCell(row, q.question);
+    addCell(row, q.category);
+    addCell(row, q.answer);
+
+    const actions = addCell(row, "");
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.className = "edit";
+    editButton.onclick = () => editQuestion(q.id);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "delete";
+    deleteButton.onclick = () => deleteQuestion(q.id);
+
+    actions.append(editButton, deleteButton);
+    questionList.appendChild(row);
+  });
+
+  if (!filtered.length) {
+    const row = document.createElement("tr");
+    const cell = addCell(row, "No questions found.");
+    cell.colSpan = 4;
+    questionList.appendChild(row);
+  }
+}
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const question = questionInput.value.trim();
+  const answer = answerInput.value.trim();
+  const category = categoryInput.value;
+
+  if (!question) return;
+
+  if (editingId !== null) {
+    questions = questions.map(q =>
+      q.id === editingId
+        ? { ...q, question, answer, category }
+        : q
+    );
+    message.textContent = "Question updated successfully!";
+  } else {
+    questions.unshift({
+      id: Date.now().toString() + Math.random().toString(16).slice(2),
+      question,
+      answer,
+      category
+    });
+    message.textContent = "Question added successfully!";
+  }
+
+  resetForm();
+  save();
+});
+
+function editQuestion(id) {
+  const q = questions.find(item => item.id === id);
+  if (!q) return;
+
+  editingId = id;
+  questionInput.value = q.question;
+  categoryInput.value = q.category;
+  answerInput.value = q.answer;
+
+  document.getElementById("formTitle").textContent = "Edit Question";
+  document.getElementById("saveButton").textContent = "Update Question";
+  document.getElementById("cancelButton").hidden = false;
+  message.textContent = "";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function deleteQuestion(id) {
+  if (!confirm("Delete this question?")) return;
+
+  questions = questions.filter(q => q.id !== id);
+  if (editingId === id) resetForm();
+  save();
+  message.textContent = "Question deleted.";
+}
+
+function resetForm() {
+  form.reset();
+  editingId = null;
+  document.getElementById("formTitle").textContent = "Add New Question";
+  document.getElementById("saveButton").textContent = "Add Question";
+  document.getElementById("cancelButton").hidden = true;
+}
+
+document.getElementById("cancelButton").onclick = resetForm;
+document.getElementById("search").addEventListener("input", render);
+document.getElementById("filter").addEventListener("change", render);
+
+render();
+</script>
 </body>
 </html>

@@ -36,6 +36,21 @@ pipeline {
             }
         }
     }
+    
+stage('Deploy') {
+    steps {
+        bat '''
+            if not exist "C:\\inetpub\\wwwroot\\question-bank" (
+                mkdir "C:\\inetpub\\wwwroot\\question-bank"
+            )
+
+            copy /Y index.html "C:\\inetpub\\wwwroot\\question-bank\\index.html"
+
+            echo Application deployed successfully
+        '''
+    }
+}
+
 
     post {
         success {

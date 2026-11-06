@@ -3,6 +3,8 @@ pipeline {
     agent any
 
     stages {
+
+        // Stage 1: Checkout source code from GitHub
         stage('Checkout') {
             steps {
                 checkout scm
@@ -10,6 +12,7 @@ pipeline {
             }
         }
 
+        // Stage 2: Validate required files
         stage('Validate') {
             steps {
                 bat '''
@@ -20,6 +23,7 @@ pipeline {
             }
         }
 
+        // Stage 3: Test the application
         stage('Test') {
             steps {
                 bat '''
@@ -30,32 +34,35 @@ pipeline {
             }
         }
 
+        // Stage 4: Build the application
         stage('Build') {
             steps {
                 echo 'Static HTML application is ready to deploy'
             }
         }
+
+        // Stage 5: Deploy the application to IIS
+        stage('Deploy') {
+            steps {
+                bat '''
+                    if not exist "C:\\inetpub\\wwwroot\\question-bank" (
+                        mkdir "C:\\inetpub\\wwwroot\\question-bank"
+                    )
+
+                    copy /Y index.html "C:\\inetpub\\wwwroot\\question-bank\\index.html"
+
+                    echo Application deployed successfully
+                '''
+            }
+        }
     }
-    
-stage('Deploy') {
-    steps {
-        bat '''
-            if not exist "C:\\inetpub\\wwwroot\\question-bank" (
-                mkdir "C:\\inetpub\\wwwroot\\question-bank"
-            )
 
-            copy /Y index.html "C:\\inetpub\\wwwroot\\question-bank\\index.html"
-
-            echo Application deployed successfully
-        '''
-    }
-}
-
-
+    // Post-build actions
     post {
         success {
-            echo 'CI pipeline completed successfully!'
+            echo 'CI/CD pipeline completed successfully!'
         }
+
         failure {
             echo 'Pipeline failed. Check Console Output.'
         }
